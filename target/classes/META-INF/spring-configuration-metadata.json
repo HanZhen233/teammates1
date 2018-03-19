@@ -1,0 +1,35 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.server.teammates1.securityConfiguration.SecuritySettings",
+      "name": "securityconfig",
+      "type": "com.server.teammates1.securityConfiguration.SecuritySettings"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.server.teammates1.securityConfiguration.SecuritySettings",
+      "defaultValue": "\/deny",
+      "name": "securityconfig.deniedpage",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.server.teammates1.securityConfiguration.SecuritySettings",
+      "defaultValue": "\/logout",
+      "name": "securityconfig.logoutsuccssurl",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.server.teammates1.securityConfiguration.SecuritySettings",
+      "defaultValue": "\/competition\/Content,\/logined",
+      "name": "securityconfig.permitall",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.server.teammates1.securityConfiguration.SecuritySettings",
+      "name": "securityconfig.urlroles",
+      "type": "java.lang.String"
+    }
+  ]
+}
