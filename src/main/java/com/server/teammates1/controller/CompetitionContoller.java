@@ -1,6 +1,6 @@
 package com.server.teammates1.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.server.teammates1.entity.CompeContent;
 
 import com.server.teammates1.entity.CompeSimpContent;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.List;
 
 
@@ -22,6 +20,7 @@ import java.util.List;
 public class CompetitionContoller {
     @Autowired
 private CompeRepository compeRepository;
+    @Autowired
 private ComSimRepository comSimRepository;
 
     @RequestMapping(value = "/simpleContent",method = RequestMethod.GET)

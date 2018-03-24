@@ -21,10 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      *
      */
-private SecuritySettings settings;
-    @Autowired
-    @Qualifier("dataSource")
-    private DataSource dataSource;
+
     @Bean
         UserDetailsService customUserService() {
             return new UserService();
@@ -32,32 +29,30 @@ private SecuritySettings settings;
 
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.userDetailsService(customUserService());
+            auth.userDetailsService(customUserService()).passwordEncoder(new MyPasswordEncoder());;
         }
+
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.formLogin().
+            http.authorizeRequests().anyRequest().authenticated().
+                    antMatchers("/competition/**").permitAll().
+                    and().
+                    formLogin().
+                    loginProcessingUrl("/login").
                     usernameParameter("username")
-                    .passwordParameter("password").permitAll()
-                    .and().authorizeRequests()
-                    .antMatchers("/competition/Content","/logined").permitAll()
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/logined")
                     .and()
                     //开启cookie保存用户数据
                     .rememberMe()
                     //设置cookie有效期
                     .tokenValiditySeconds(60 * 60 * 24 * 7)
-                    .tokenRepository(tokenRepository())
                     .and()
                     .logout().permitAll()
                     .and().csrf().disable();
         }
-    @Bean
-    public JdbcTokenRepositoryImpl tokenRepository(){
-        JdbcTokenRepositoryImpl jtr = new JdbcTokenRepositoryImpl();
-        jtr.setDataSource(dataSource);
-        return jtr;
-    }
+
 
     }
 

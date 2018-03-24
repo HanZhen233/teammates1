@@ -4,7 +4,7 @@ import javax.annotation.Generated;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "compe_name")
+@Table(name = "compeName")
 public class CompeSimpContent {
 
 
