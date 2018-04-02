@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "compeName")
-public class CompeSimpContent {
+public class CompetitionSimpleInfo {
 
 
     @Id

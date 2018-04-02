@@ -1,9 +1,9 @@
 package com.server.teammates1.controller;
 
 
-import com.server.teammates1.entity.CompeContent;
+import com.server.teammates1.entity.CompetitionInfo;
 
-import com.server.teammates1.entity.CompeSimpContent;
+import com.server.teammates1.entity.CompetitionSimpleInfo;
 import com.server.teammates1.repository.ComSimRepository;
 import com.server.teammates1.repository.CompeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +23,17 @@ private CompeRepository compeRepository;
     @Autowired
 private ComSimRepository comSimRepository;
 
-    @RequestMapping(value = "/simpleContent",method = RequestMethod.GET)
-    public List<CompeSimpContent> getSimpleCompetition1(){
+    @RequestMapping(value = "/simpleContentAll",method = RequestMethod.GET)
+    public List<CompetitionSimpleInfo> getSimpleCompetition1(){
         return comSimRepository.findAll();
     }
-
-
-    @RequestMapping(value = "/Content",method = RequestMethod.POST)
-
-    public CompeContent getSimpleCompetition(@RequestParam("name")String name){
+    @RequestMapping(value = "/ContentByname",method = RequestMethod.POST)
+    public CompetitionInfo getCompetitionByName(@RequestParam("name")String name){
         return compeRepository.findByName(name);
+    }
+    @RequestMapping(value = "/ContentByLevel",method = RequestMethod.POST)
+    public CompetitionInfo getSimpleCompetitionByLevel(@RequestParam("level")String level){
+        return compeRepository.findByLevel(level);
     }
 
 

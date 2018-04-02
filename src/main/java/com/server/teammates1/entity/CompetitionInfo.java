@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "compeContent")
 
-public class CompeContent {
+public class CompetitionInfo {
 
 
     @Id

@@ -1,10 +1,9 @@
 package com.server.teammates1.repository;
 
-import com.server.teammates1.entity.CompeContent;
-import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
+import com.server.teammates1.entity.CompetitionInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CompeRepository extends JpaRepository<CompeContent,Integer> {
-    public CompeContent findByName(String name);
+public interface CompeRepository extends JpaRepository<CompetitionInfo,Integer> {
+  public CompetitionInfo findByName(String name);
+  public   CompetitionInfo findByLevel(String level);
 }
