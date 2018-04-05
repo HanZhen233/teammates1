@@ -1,8 +1,7 @@
 package com.server.teammates1.securityConfiguration;
 
 import com.server.teammates1.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,7 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 import javax.sql.DataSource;
 
@@ -29,20 +29,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-            auth.userDetailsService(customUserService()).passwordEncoder(new MyPasswordEncoder());;
+            auth.userDetailsService(customUserService()).passwordEncoder(passwordEncoder());;
         }
+   @Bean
+   public BCryptPasswordEncoder passwordEncoder() {
+        return   new BCryptPasswordEncoder();
+    }
 
 
-        @Override
+    @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests().anyRequest().authenticated().
-                    antMatchers("/competition/**").permitAll().
+
+            http.authorizeRequests().
+                    antMatchers("/competition/**","/addUser","/teamInfo/browseTeamInfo").permitAll()
+                    .anyRequest().authenticated().
                     and().
                     formLogin().
                     loginProcessingUrl("/login").
                     usernameParameter("username")
                     .passwordParameter("password")
                     .defaultSuccessUrl("/logined")
+                    .and()
+                    .logout().logoutUrl("/logout")
                     .and()
                     //开启cookie保存用户数据
                     .rememberMe()

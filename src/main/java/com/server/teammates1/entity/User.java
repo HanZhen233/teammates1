@@ -10,8 +10,8 @@ import java.util.List;
 @Table(name="user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private long id;
     private String name;
     private String password;
     private String email;
@@ -22,12 +22,12 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id")},
     inverseJoinColumns = {@JoinColumn(name = "roles_id")})
     private List<Role> roles;
-
-    public Long getId() {
+    public User(){}
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

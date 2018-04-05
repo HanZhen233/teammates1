@@ -1,5 +1,7 @@
 package com.server.teammates1.service;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.server.teammates1.entity.Role;
 import com.server.teammates1.entity.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,7 +43,7 @@ public class SecurityUser extends User implements UserDetails
     }
 
     @Override
-    public String getPassword() {
+  @JsonIgnore  public String getPassword() {
         return super.getPassword();
     }
 
