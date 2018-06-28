@@ -22,9 +22,15 @@ public class SecurityUser extends User implements UserDetails
             this.setId(user.getId());
             this.setName(user.getName());
             this.setEmail(user.getEmail());
-            this.setMobilePhone(user.getMobilePhone());
+            this.setPhone(user.getPhone());
             this.setPassword(user.getPassword());
             this.setRoles(user.getRoles());
+            this.setUniversity(user.getUniversity());
+            this.setQq(user.getQq());
+            this.setSex(user.getSex());
+            this.setTechnology(user.getTechnology());
+            this.setMajor(user.getMajor());
+
         }
     }
 

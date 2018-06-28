@@ -22,7 +22,7 @@ public class AddUser {
     user.setName(name);
     user.setPassword(password);
     user.setEmail(email);
-    user.setMobilePhone(mobilePhone);
+    user.setPhone(mobilePhone);
     Role role=roleRepository.findById(2);
          List<Role> roles= new ArrayList<>();
          roles.add(role);

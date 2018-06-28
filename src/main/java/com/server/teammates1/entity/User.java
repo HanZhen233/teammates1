@@ -2,6 +2,8 @@ package com.server.teammates1.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import java.util.List;
@@ -11,19 +13,25 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue
-    private long id;
+    @JsonIgnore private long id;
     private String name;
     private String password;
     private String email;
-    private String mobilePhone;
+    private String phone;
+    private String qq;
+    private String sex;
+    private String university;
+    private String major;
+    private String technology;
+
 
     @ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = {@JoinColumn(name = "user_id")},
     inverseJoinColumns = {@JoinColumn(name = "roles_id")})
-    private List<Role> roles;
+    @JsonIgnore    private List<Role> roles;
     public User(){}
-    public long getId() {
+   public long getId() {
         return id;
     }
 
@@ -55,12 +63,36 @@ public class User {
         this.email = email;
     }
 
-    public String getMobilePhone() {
-        return mobilePhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(String university) {
+        this.university = university;
+    }
+
+    public String getTechnology() {
+        return technology;
+    }
+
+    public void setTechnology(String technology) {
+        this.technology = technology;
     }
 
     public List<Role> getRoles() {
@@ -69,5 +101,21 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
     }
 }

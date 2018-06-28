@@ -11,10 +11,13 @@ public class TeamInfoComment implements Serializable {
     private  long id;
     private  String commentInfo;
     private  String commentator;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "team_info_id")
-    private TeamInfo teamInfo;
+    private  String time;
 
+
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "team_info_id")
+//    private TeamInfo teamInfo;
+   private String teamId;
     public  TeamInfoComment(){
     }
     public long getId() {
@@ -41,12 +44,27 @@ public class TeamInfoComment implements Serializable {
         this.commentator = commentator;
     }
 
-    public TeamInfo getTeamInfo() {
-        return teamInfo;
+//    public TeamInfo getTeamInfo() {
+//        return teamInfo;
+//    }
+//
+//    public void setTeamInfo(TeamInfo teamInfo) {
+//        this.teamInfo = teamInfo;
+//    }
+
+    public String getTime() {
+        return time;
     }
 
-    public void setTeamInfo(TeamInfo teamInfo) {
-        this.teamInfo = teamInfo;
+    public void setTime(String time) {
+        this.time = time;
     }
 
+    public String getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
+    }
 }

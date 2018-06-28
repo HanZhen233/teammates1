@@ -25,35 +25,61 @@ public class UserController {
     private SysUserRepository sysUserRepository;
     @Autowired
     RoleRepository roleRepository;
+  @RequestMapping(value = "login1")
+  public  String login(){
+      return "登录成功";
+  }
 
     @RequestMapping(value = "/logined")/*返回个人信息*/
-    public  SecurityUser  hello(){
-        String authority=null;
-        String  username=null;
+    public  User  hello(){
+
         SecurityUser securityUser=null;
         Object principal =  SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
         if(principal instanceof UserDetails){
              securityUser   =((SecurityUser)principal);
-
             }
-        return    securityUser;
+            User user=new User();
+        user.setName(securityUser.getUsername());
+        user.setMajor(securityUser.getMajor());
+        user.setSex(securityUser.getSex());
+        user.setUniversity(securityUser.getUniversity());
+        user.setQq(securityUser.getQq());
+        user.setEmail(securityUser.getEmail());
+        user.setTechnology(securityUser.getTechnology());
+        user.setPhone(securityUser.getPhone());
+
+        return    user;
+
+
     }
 
         @RequestMapping(value = "/addUser",method = RequestMethod.POST)/*注册*/
        public String addUername(@RequestParam("username")String username,@RequestParam("password")String password
-       ,                   @RequestParam("mail")String mail, @RequestParam("phone") String phone
-//                          ,@RequestParam("sex")String sex, @RequestParam("school")String school,
-//                          @RequestParam("major")String major
+       ,                   @RequestParam("mail")String mail, @RequestParam("phone") String phone,
+                        @RequestParam("qq")String qq, @RequestParam("sex")String sex, @RequestParam("university")String university,
+                          @RequestParam("major")String major,
+                          @RequestParam("technology")String technology
                              ){
-
-
+//            private String qq;
+//            private String sex;
+//            private String university;
+//            private String technology;
+            if(sysUserRepository.findByName(username)!=null)
+                return "用户已经存在";
             password= new BCryptPasswordEncoder().encode(password);
             User user=new User();
             user.setName(username);
             user.setPassword(password);
             user.setEmail(mail);
-            user.setMobilePhone(phone);
+            user.setPhone(phone);
+            user.setQq(qq);
+            user.setSex(sex);
+            user.setUniversity(university);
+            user.setMajor(major);
+            user.setTechnology(technology);
+
+
             Role role=roleRepository.findById(2);
             List<Role> roles= new ArrayList<>();
             roles.add(role);
@@ -61,12 +87,35 @@ public class UserController {
             sysUserRepository.save(user);
 
 //           AddUser addUser=new AddUser(username,password,mail,phone);
-
-
         return "添加成功";
         }
 
-        @RequestMapping(value = "/logout")
+
+    @RequestMapping(value = "/changePassword",method = RequestMethod.POST)/*注册*/
+    public String changePassword(@RequestParam("password")String password)throws Exception{
+        String authority=null;
+        String  username=null;
+        SecurityUser securityUser=null;
+        Object principal =  SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        if(principal instanceof UserDetails){
+            securityUser   =((SecurityUser)principal);
+        }
+     username=securityUser.getUsername();
+        password= new BCryptPasswordEncoder().encode(password);
+        User user= sysUserRepository.findByName(username);
+        user.setPassword(password);
+     sysUserRepository.saveAndFlush(user);
+        return "修改成功";
+    }
+
+
+
+
+
+
+
+    @RequestMapping(value = "/logout")
     public String logout(){
 
     return "登出";

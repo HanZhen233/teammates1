@@ -14,10 +14,14 @@ public class TeamInfo implements Serializable {
     private long id;
     private String competitionName;
     private String competitionLevel;
+    private String time;
+    private String university;
     private String introduction;
-    private String  initiator;
-    @OneToMany(mappedBy = "teamInfo")
-    private  List<TeamInfoComment> teamInfoComments;
+    private String initiator;
+    private String requirement;
+    private String connection;
+//    @OneToMany(mappedBy = "teamInfo")
+//    private List<TeamInfoComment> teamInfoComments;
 
     public long getId() {
         return id;
@@ -50,6 +54,7 @@ public class TeamInfo implements Serializable {
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
     }
+
     public String getInitiator() {
         return initiator;
     }
@@ -59,12 +64,44 @@ public class TeamInfo implements Serializable {
     }
 
 
+//    public List<TeamInfoComment> getTeamInfoComments() {
+//        return teamInfoComments;
+//    }
+//
+//    public void setTeamInfoComments(List<TeamInfoComment> teamInfoComments) {
+//        this.teamInfoComments = teamInfoComments;
+//    }
 
-    public List<TeamInfoComment> getTeamInfoComments() {
-        return teamInfoComments;
+    public String getUniversity() {
+        return university;
     }
 
-    public void setTeamInfoComments(List<TeamInfoComment> teamInfoComments) {
-        this.teamInfoComments = teamInfoComments;
+    public void setUniversity(String university) {
+        this.university = university;
     }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getRequirement() {
+        return requirement;
+    }
+
+    public void setRequirement(String requirement) {
+        this.requirement = requirement;
+    }
+
+    public String getConnection() {
+        return connection;
+    }
+
+    public void setConnection(String connection) {
+        this.connection = connection;
+    }
+
 }
